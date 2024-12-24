@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 des Restaurants d'Annecy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Les 10 Meilleurs Restaurants d'Annecy</h1>
+
+        <!-- Carte interactive -->
+        <div class="mb-8 rounded-lg overflow-hidden shadow-lg">
+            <div id="map" class="w-full h-96"></div>
+        </div>
+
+        <!-- Liste des restaurants -->
+        <div class="grid gap-8 md:grid-cols-2">
+            <!-- Le Denti -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">1. Le Denti</h2>
+                        <div class="flex items-center">
+                            <span class="text-xl font-bold text-blue-600">4.9</span>
+                            <svg class="w-5 h-5 text-yellow-500 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">25 Av. de Loverchy, 74000 Annecy</p>
+                    <p class="text-gray-800 mb-4">Restaurant moderne proposant une cuisine française raffinée, reconnu par le guide Michelin.</p>
+                    <!-- Horaires -->
+                    <div class="mb-4">
+                        <h3 class="font-bold text-gray-700 mb-2">Horaires d'ouverture :</h3>
+                        <ul class="text-sm text-gray-600">
+                            <li>Lundi: 12h00-13h00, 19h30-20h30</li>
+                            <li>Mardi-Mercredi: Fermé</li>
+                            <li>Jeudi-Samedi: 12h00-13h00, 19h30-20h30</li>
+                            <li>Dimanche: Fermé</li>
+                        </ul>
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="text-gray-700 italic">"Le Denti is definitely the highlight of our trip in France. The well decorated restaurant, mini kitchen is the factory for the surprise amazing food, as delicious as michelin star ones with awesome presentation."</p>
+                        <p class="text-gray-500 mt-2">- Leon Zhou</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saba Restaurant -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">2. Saba Restaurant</h2>
+                        <div class="flex items-center">
+                            <span class="text-xl font-bold text-blue-600">4.9</span>
+                            <svg class="w-5 h-5 text-yellow-500 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">21 Fbg Sainte-Claire, 74000 Annecy</p>
+                    <p class="text-gray-800 mb-4">Fusion unique entre la cuisine française et japonaise, dans un cadre élégant et raffiné.</p>
+                    <!-- Horaires -->
+                    <div class="mb-4">
+                        <h3 class="font-bold text-gray-700 mb-2">Horaires d'ouverture :</h3>
+                        <ul class="text-sm text-gray-600">
+                            <li>Lundi-Vendredi: 12h00-13h30, 19h30-21h00</li>
+                            <li>Samedi-Dimanche: Fermé</li>
+                        </ul>
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="text-gray-700 italic">"This was a fabulous lunch experience! We loved this French and Japanese fusion cuisine. Every dish was beautifully presented and full of interesting and delicious flavours."</p>
+                        <p class="text-gray-500 mt-2">- Caro Taste of Savoie</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Script pour la carte -->
+            <script>
+                function initMap() {
+                    const annecy = { lat: 45.899247, lng: 6.129384 };
+                    const map = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 14,
+                        center: annecy,
+                    });
+
+                    const restaurants = [
+                        {
+                            name: "Le Denti",
+                            position: { lat: 45.8964732, lng: 6.1208144 },
+                            rating: 4.9
+                        },
+                        {
+                            name: "Saba Restaurant",
+                            position: { lat: 45.897323, lng: 6.122935399999999 },
+                            rating: 4.9
+                        },
+                        {
+                            name: "Là-Haut",
+                            position: { lat: 45.9106442, lng: 6.1387428 },
+                            rating: 4.9
+                        }
+                    ];
+
+                    restaurants.forEach(restaurant => {
+                        new google.maps.Marker({
+                            position: restaurant.position,
+                            map: map,
+                            title: `${restaurant.name} (${restaurant.rating}⭐)`
+                        });
+                    });
+                }
+
+                window.initMap = initMap;
+            </script>
+        </div>
+    </div>
+</body>
+</html>
